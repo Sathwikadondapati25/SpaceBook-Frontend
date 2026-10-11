@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SpaceBook Midnight Theme for OpenStreetMap Tiles */
+.spacebook-osm-map .leaflet-tile {
+  filter: brightness(0.68) invert(1) contrast(1.75) hue-rotate(225deg) saturate(0.65) brightness(0.85);
+}
+
+.spacebook-osm-map .leaflet-container {
+  background-color: #0F0A1E !important;
+}
+
+.spacebook-osm-map .leaflet-control-attribution {
+  background: rgba(15, 10, 30, 0.85) !important;
+  color: #A89BC0 !important;
+  font-size: 10px !important;
+  backdrop-filter: blur(8px);
+  border-top-left-radius: 8px;
+  padding: 2px 8px;
+}
+
+.spacebook-osm-map .leaflet-control-attribution a {
+  color: #B794F6 !important;
+  text-decoration: none;
+}
+
+.spacebook-osm-map .leaflet-popup-content-wrapper {
+  background: #1A1233 !important;
+  border: 1px solid #3D2A5C !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  padding: 0 !important;
+}
+
+.spacebook-osm-map .leaflet-popup-tip {
+  background: #1A1233 !important;
+}
+
