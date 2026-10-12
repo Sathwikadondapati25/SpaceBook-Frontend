@@ -33,6 +33,13 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       refreshToken()
     }
+    // Check if backend is unreachable
+    if (!error.response && error.code === 'ECONNREFUSED') {
+      // Backend is offline - throw a clear error
+      const backendError = new Error('Cannot reach the server. Please check your connection and try again.')
+      backendError.name = 'BACKEND_OFFLINE'
+      throw backendError
+    }
     return Promise.reject(error)
   }
 )
