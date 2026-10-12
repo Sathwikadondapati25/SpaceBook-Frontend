@@ -502,9 +502,8 @@ export const authApi = {
 
     // Validate organizer invite code if organizer
     if (data.role === 'ORGANIZER') {
-      const validInvite = data.organizerInviteCode?.trim() === 'ORG-2024-SECRET'
-      if (!validInvite) {
-        throw new Error('Invalid Organizer Invite Code. Use authorized code: ORG-2024-SECRET')
+      if (!data.organizerInviteCode?.trim()) {
+        throw new Error('Organizer invite code is required')
       }
     }
 
