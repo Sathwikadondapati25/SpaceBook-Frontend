@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Badge from '../../components/Badge'
+import StallIcon from '../../components/StallIcon'
 import { bookingsApi, getStoredUser, clearAuth, UserSession } from '../../lib/api'
+import { BookingData, formatINR } from '../../lib/sampleData'
 import {
   LayoutGrid,
   Building2,
@@ -132,7 +134,7 @@ export default function BookingRequests() {
           <div className="p-6 border-b border-[#3D2A5C]/60 flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#F472B6] p-0.5 shadow-glow">
               <div className="w-full h-full bg-[#1A1233] rounded-[10px] flex items-center justify-center">
-                <LayoutGrid className="w-4 h-4 text-[#F472B6]" />
+                <StallIcon className="w-4 h-4 text-[#F472B6]" />
               </div>
             </div>
             <div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import Input from '../components/Input'
-import { authApi } from '../lib/api'
+import { authApi, getStoredUser } from '../lib/api'
 import { useAuth } from '../context/AuthContext'
 import {
   Building2,
@@ -81,7 +81,7 @@ export default function Onboarding() {
 
     try {
       setSubmitting(true)
-      const res = authApi.completeProfile({
+      const res = await authApi.completeProfile({
         name: formData.name,
         businessName: formData.businessName || formData.name,
         phone: formData.phone.startsWith('+91') ? formData.phone : `+91 ${formData.phone}`,
@@ -92,7 +92,10 @@ export default function Onboarding() {
         description: formData.description || 'Indian commercial exhibitor and verified stall partner.',
       })
 
-      if (res.data) {
+      const updatedUser = getStoredUser()
+      if (updatedUser) {
+        setUserSession(updatedUser)
+      } else if (res?.data) {
         setUserSession(res.data)
       }
 
