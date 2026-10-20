@@ -19,7 +19,6 @@ import {
   bookingsApi,
 } from '../../lib/api'
 import { useAuth } from '../../context/AuthContext'
-import { SAMPLE_EVENTS, SAMPLE_BOOKINGS } from '../../lib/sampleData'
 import StallIcon from '../../components/StallIcon'
 import {
   LayoutDashboard,
@@ -80,18 +79,18 @@ export default function OrganizerDashboard() {
       if (eventsRes.data && eventsRes.data.length > 0) {
         setEvents(eventsRes.data)
       } else {
-        setEvents(SAMPLE_EVENTS)
+        setEvents([])
       }
 
       if (bookingsRes.data && bookingsRes.data.length > 0) {
         setBookings(bookingsRes.data)
       } else {
-        setBookings(SAMPLE_BOOKINGS)
+        setBookings([])
       }
     } catch (err) {
-      console.warn('Dashboard fallback triggered:', err)
-      setEvents(SAMPLE_EVENTS)
-      setBookings(SAMPLE_BOOKINGS)
+      console.warn('Dashboard load error:', err)
+      setEvents([])
+      setBookings([])
     } finally {
       setLoading(false)
     }
@@ -104,7 +103,7 @@ export default function OrganizerDashboard() {
 
   const handleQuickApprove = async (bookingId: number) => {
     try {
-      const res = await bookingsApi.approveBooking(bookingId)
+      const res = await bookingsApi.approveBooking(bookingId, 'APPROVE')
       if (res.success) {
         setActionFeedback(`Booking #${bookingId} safely approved and allocated!`)
         setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'APPROVED' } : b))

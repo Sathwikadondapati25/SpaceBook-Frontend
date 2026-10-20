@@ -92,8 +92,8 @@ export default function Onboarding() {
         description: formData.description || 'Indian commercial exhibitor and verified stall partner.',
       })
 
-      if (res.user) {
-        setUserSession(res.user)
+      if (res.data) {
+        setUserSession(res.data)
       }
 
       if (user?.role === 'ORGANIZER') {

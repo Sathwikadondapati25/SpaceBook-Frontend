@@ -202,6 +202,11 @@ export const bookingsApi = {
     return response.data
   },
 
+  getOrganizerBookings: async () => {
+    // For now, return empty array - organizer needs to select an event first
+    return { success: true, data: [] }
+  },
+
   getBooking: async (bookingId: number) => {
     const response = await api.get(`/api/bookings/${bookingId}`)
     return response.data

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Badge from '../../components/Badge'
 import { bookingsApi, getStoredUser, clearAuth, UserSession } from '../../lib/api'
-import { SAMPLE_BOOKINGS, BookingData, formatINR } from '../../lib/sampleData'
 import {
   LayoutGrid,
   Building2,
@@ -48,11 +47,11 @@ export default function BookingRequests() {
       if (res.data && res.data.length > 0) {
         setBookings(res.data)
       } else {
-        setBookings(SAMPLE_BOOKINGS)
+        setBookings([])
       }
     } catch (err) {
-      console.warn('Booking load fallback:', err)
-      setBookings(SAMPLE_BOOKINGS)
+      console.warn('Booking load error:', err)
+      setBookings([])
     } finally {
       setLoading(false)
     }
@@ -66,7 +65,7 @@ export default function BookingRequests() {
   const handleApprove = async (id: number) => {
     try {
       setProcessing(true)
-      const res = await bookingsApi.approveBooking(id)
+      const res = await bookingsApi.approveBooking(id, 'APPROVE')
       if (res.success) {
         setFeedback({
           message: `Booking #${id} successfully approved! Stall allocation locked into database. Competing requests resolved.`,
